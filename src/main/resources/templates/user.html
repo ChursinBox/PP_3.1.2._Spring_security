@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>It's you, my friend!</title>
+</head>
+
+<body>
+
+<p th:text="${user.getUsername()}">VALUE</p>
+<p th:text="${user.getAge()}">VALUE</p>
+<p th:text="${user.getId()}">VALUE</p>
+<p th:text="${user.getEmail()}">VALUE</p>
+
+<br>
+<br>
+<br>
+
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="logout"/>
+</form>
+
+</body>
+</html>
