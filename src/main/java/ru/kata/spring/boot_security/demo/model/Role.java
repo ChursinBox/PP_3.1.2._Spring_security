@@ -4,7 +4,6 @@ import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "roles")
@@ -62,7 +61,6 @@ public class Role implements GrantedAuthority {
     @Override
     public String toString() {
         return roleName;
-
-//        return users.stream().map((MyUser t) -> getRoleName(t)).collect(Collectors.toSet());
     }
+
 }

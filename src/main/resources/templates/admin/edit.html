@@ -16,23 +16,25 @@
 
     <br>
     <label for="age">Enter age:</label>
-    <input type="text" th:field="*{age}" id="age"/>
+    <input type="number" th:field="*{age}" id="age"/>
 
     <br>
     <label for="email">Enter email:</label>
-    <input type="text" th:field="*{email}" id="email"/>
-
-    <br>
-    <label for="id">Enter id:</label>
-    <input type="text" th:field="*{id}" id="id"/>
+    <input type="email" th:field="*{email}" id="email"/>
 
     <br>
     <label for="password">Enter password:</label>
     <input type="text" th:field="*{password}" id="password"/>
 
     <br>
-    <label for="role">Enter role:</label>
-    <input type="text" th:field="*{roles}" id="role"/>
+    <label for="roles">Roles:</label>
+    <select id="roles" name="roles" multiple>
+        <option th:each="role : ${allRoles}"
+                th:value="${role.id}"
+                th:text="${role.roleName}"
+                th:selected="${user.roles.contains(role)}">
+        </option>
+    </select>
 
     <br>
     <input type="submit" value="Update"/>

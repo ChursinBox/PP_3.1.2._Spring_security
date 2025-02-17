@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.kata.spring.boot_security.demo.model.MyUser;
 import ru.kata.spring.boot_security.demo.model.Role;
 import ru.kata.spring.boot_security.demo.repositories.MyUserRepository;
+import ru.kata.spring.boot_security.demo.repositories.RoleRepository;
 
 import java.util.Collections;
 
@@ -14,18 +15,20 @@ import java.util.Collections;
 public class RegistrationService {
 
     private final MyUserRepository myUserRepository;
+    private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public RegistrationService(MyUserRepository myUserRepository, PasswordEncoder passwordEncoder) {
+    public RegistrationService(MyUserRepository myUserRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder) {
         this.myUserRepository = myUserRepository;
+        this.roleRepository = roleRepository;
         this.passwordEncoder = passwordEncoder;
     }
 
     @Transactional
     public void register(MyUser myUser) {
         myUser.setPassword(passwordEncoder.encode(myUser.getPassword()));
-        myUser.setRoles(Collections.singleton(new Role(1, "ROLE_USER")));
+        myUser.setRoles(Collections.singleton(roleRepository.findByRoleName("ROLE_USER")));
         myUserRepository.save(myUser);
     }
 }
